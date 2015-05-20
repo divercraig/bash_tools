@@ -1,0 +1,29 @@
+#logtail
+
+# This will add the logtail command to bash which can be used by typing "logtail <path to log file>"
+# The logtail command will provide a colour coded tail of the log file base on keywords in the line.
+#
+# To add logtail simply add "source <path to this file>" to your ~/.bash_profile
+
+
+function logtail { tail -f "$1" | awk '{ DEFAULT = 1 }
+/CRITICAL/ {
+        print "\033[1;31m" $0 "\033[00m" 
+        DEFAULT = 0
+}
+/ERROR/ {
+        print "\033[31m" $0 "\033[00m"
+        DEFAULT = 0
+}
+/WARNING/ {
+        print "\033[1;33" $0 "\033[00m"
+        DEFAULT = 0
+}
+/DEBUG/ {
+        print "\033[32m" $0 "\033[00m"
+        DEFAULT = 0
+}
+DEFAULT {
+        print $0
+}';}
+export -f logtail
