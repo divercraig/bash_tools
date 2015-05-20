@@ -1,0 +1,22 @@
+# git_branch
+
+# This file changes the command prompt to include git branch information where there is any.
+# To use this feature simply add "source <path to this file>" to your ~/.bash_profile file.
+#
+# This will add the name of the current git branch to your command prompt in green if there are no modified files
+# This will add the name of the current git branch to your command prompt in red if there are any modified files
+# This will not display a branch name if the current directory is not a git repo
+
+parse_git_branch() {
+    git symbolic-ref --short HEAD 2> /dev/null | sed -e 's/\(.*\)/ (\1)/'
+}
+
+get_colour() {
+	if (( $( git status -s 2> /dev/null | wc -m) == 0 ));
+		then  echo '32'
+	else echo '31'
+	fi
+}
+
+# PROMPT configuration
+export PS1="\u \W\[\e[\$(get_colour)m\]\$(parse_git_branch)\[\e[00m\] $ "
