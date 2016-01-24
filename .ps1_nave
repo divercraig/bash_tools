@@ -1,0 +1,7 @@
+# This file changes the command prompt to include version of node enabled by nave... if any.
+# To use this feature simply add "source <path to this file>" to your ~/.bash_profile file.
+
+# PROMPT configuration
+if [ -n "$NAVE" ]; then
+  export PS1="\[\e[0;31m\](Node $NAVE)\[\e[00m\] $PS1"
+fi
