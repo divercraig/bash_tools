@@ -19,4 +19,4 @@ get_colour() {
 }
 
 # PROMPT configuration
-export PS1="\u \W\[\e[\$(get_colour)m\]\$(parse_git_branch)\[\e[00m\] $ "
+export PS1="\e[\$(get_colour)m\]\$(parse_git_branch)\[\e[00m\] $PS1"
