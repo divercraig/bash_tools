@@ -8,7 +8,7 @@
 # This will not display a branch name if the current directory is not a git repo
 
 parse_git_branch() {
-    git symbolic-ref --short HEAD 2> /dev/null | sed -e 's/\(.*\)/ (\1)/'
+    git symbolic-ref --short HEAD 2> /dev/null | sed -e 's/\(.*\)/(\1)/'
 }
 
 get_colour() {
